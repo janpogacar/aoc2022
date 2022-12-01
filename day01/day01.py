@@ -23,4 +23,9 @@ for x in calDataList:
         calSums.append(tmpSum)
         tmpSum=0
 
+# Puzzle 01_1 solution
 print("Max calorie sum is %d" %max(calSums)) # Print maximum value
+
+# Sort list of elves from highest to lowest
+calSums.sort(reverse=True)
+print("Calorie sum of three elves is %d" %(calSums[0]+calSums[1]+calSums[2]))
