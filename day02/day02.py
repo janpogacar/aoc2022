@@ -40,7 +40,7 @@ score = 0
 for x in gameDataList:
    # Add the winning scores first
     if x[2] == "X": # loss
-        score += 0
+        score += loss
         if x[0] == "A":
             score += 3 #rock scissors
         elif x[0] == "B":
@@ -48,7 +48,7 @@ for x in gameDataList:
         elif x[0] == "C":
             score += 2# scissors paper
     elif x[2] == "Y": # draw
-        score += 3
+        score += draw
         if x[0] == "A":
             score += 1 #rock rock
         elif x[0] == "B":
@@ -56,7 +56,7 @@ for x in gameDataList:
         elif x[0] =="C":
             score += 3 # scissors scissors
     elif x[2] == "Z": # win
-        score += 6
+        score += win
         if x[0] == "A":
             score += 2 #rock paper
         elif x[0] == "B":
