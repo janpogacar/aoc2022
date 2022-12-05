@@ -1,4 +1,5 @@
 import numpy as np
+import copy
 # opening the file in read mode
 myFile = open("input_05_1.txt", "r")
 
@@ -36,12 +37,22 @@ for x in mStack:
     if xList is not None:
         stack.append(xList[::-1])
 
+# copy stack for part 2
+stack2 = copy.deepcopy(stack)
 # Rearrange
 for i in range(len(cleanMoves)):
    for j in range(cleanMoves[i][0]):
        stack[cleanMoves[i][2]-1].append(stack[cleanMoves[i][1]-1].pop())
 
 # Print part 1 solution
+print("Part 1:")
 for x in stack:
-    print(x[-1])
-    
+    print(x[-1], end ="")
+
+for i in range(len(cleanMoves)):
+    stack2[cleanMoves[i][2]-1] += stack2[cleanMoves[i][1]-1][-1*cleanMoves[i][0]:] 
+    stack2[cleanMoves[i][1]-1] = stack2[cleanMoves[i][1]-1][:-1*cleanMoves[i][0]]
+
+print("\nPart 2:")
+for x in stack2:
+    print(x[-1], end ="")
