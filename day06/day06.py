@@ -1,6 +1,3 @@
-import numpy as np
-import copy
-
 def detectUnique(testList, mLen):
     # loop over input data
     for i in range(len(rsData)-mLen):
