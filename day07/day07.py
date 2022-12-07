@@ -40,7 +40,6 @@ for x in rsDataList:
         if folderName != "..":
             currentFolder = Folder()
             currentFolder.name = folderName
-            currentFolder.linked = []
             folderList.append(currentFolder)
             currentFolder.path = folderPath.copy()
             folderPath.append(folderName)
@@ -55,13 +54,11 @@ for x in rsDataList:
     if a.isnumeric():
          currentFolder.size += int(a)
 
-names = []
 for x in folderList:
     recPath = x.path.copy()
     recPath.append(x.name)
     x.totalSize = getTotalSize(x)
-
-for x in folderList:
+    # Sum for puzzle 1
     if x.totalSize <= 100000:
         result += x.totalSize
 
@@ -70,15 +67,9 @@ print(f"Puzzle 1 result: {result}")
 spaceFree = 70000000-folderList[0].totalSize
 spaceNeeded = 30000000 - spaceFree
 result2 = folderList[0].totalSize
-tsList = []
+
 for x in folderList:
-    tsList.append(x.totalSize)
     if x.totalSize >= spaceNeeded and x.totalSize < result2:
         result2 = x.totalSize
-
-tList = []
-for x in folderList:
-    if len(x.path) != 0:
-        tList.append([x.name, x.path[-1]])
 
 print(f"Puzzle 2 result: {result2}") 
