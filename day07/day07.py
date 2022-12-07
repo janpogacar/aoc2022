@@ -1,5 +1,3 @@
-import sys
-sys.setrecursionlimit(1000)
 def check_if_equal(list_1, list_2):
     if len(list_1) != len(list_2):
         return False
@@ -67,9 +65,7 @@ for x in folderList:
     if x.totalSize <= 100000:
         result += x.totalSize
 
-
 print(f"Puzzle 1 result: {result}") 
-
 
 spaceFree = 70000000-folderList[0].totalSize
 spaceNeeded = 30000000 - spaceFree
@@ -84,10 +80,5 @@ tList = []
 for x in folderList:
     if len(x.path) != 0:
         tList.append([x.name, x.path[-1]])
-
-#for i, x in enumerate(tList):
-#    for j, y in enumerate(tList):
-#        if x == y and i != j:
-#            print("warning")
 
 print(f"Puzzle 2 result: {result2}") 
