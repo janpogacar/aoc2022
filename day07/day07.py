@@ -7,7 +7,7 @@ def getTotalSize(folder):
     global recPath
     tmpSize = folder.size
     for x in folderList:
-        if (x.name in folder.linked) and check_if_equal(x.path, recPath):
+        if check_if_equal(x.path, recPath):
             recPath.append(x.name)
             tmpSize += getTotalSize(x) 
             recPath.pop() 
