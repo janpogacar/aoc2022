@@ -26,10 +26,10 @@ for i, x in enumerate(rsDataList):
             result+=1
         # check all lines and columns for larger trees
         # check order: left, right, top, bottom
-        elif all(int(x[j]) > int(z) for z in x[:j]) \
-        or all(int(x[j]) > int(z) for z in x[j+1:]) \
-        or all(int(x[j]) > int(z) for z in trList[j][:i]) \
-        or all(int(x[j]) > int(z) for z in trList[j][i+1:]): 
+        elif (all(int(x[j]) > int(z) for z in x[:j])
+        or all(int(x[j]) > int(z) for z in x[j+1:])
+        or all(int(x[j]) > int(z) for z in trList[j][:i])
+        or all(int(x[j]) > int(z) for z in trList[j][i+1:])):
             result += 1
 
         # Set starting score for part 2
@@ -46,30 +46,30 @@ for i, x in enumerate(rsDataList):
                 break
         sScore = sScore * tmpScore
         tmpScore = 0
-        # right sightline     
+        # right sightline
         for k, z in enumerate(x[j+1:]):
             tmpScore +=1
             if int(z) >= int(x[j]):
                 break
-        sScore = sScore * tmpScore        
+        sScore = sScore * tmpScore
         tmpScore = 0
-        # top sightline         
+        # top sightline
         for k, z in enumerate(np.flip(trList[j][:i])):
             tmpScore +=1
             if int(z) >= int(x[j]):
                 break
-        sScore = sScore * tmpScore        
-        tmpScore = 0 
-        # bottom sightline        
+        sScore = sScore * tmpScore
+        tmpScore = 0
+        # bottom sightline
         for k, z in enumerate(trList[j][i+1:]):
             tmpScore +=1
             if int(z) >= int(x[j]):
                 break
         sScore = sScore * tmpScore
-        scList[i][j]=sScore 
+        scList[i][j]=sScore
 
-print(f"Puzzle 1 result:{result}")  
-# print maximum value for puzzle 2            
+print(f"Puzzle 1 result:{result}")
+# print maximum value for puzzle 2
 print(f"Puzzle 2 result:{np.max(scList)}")
 
 
