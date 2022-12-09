@@ -1,8 +1,7 @@
-import math
+from scipy.spatial import distance
+
 def moveTail(hPos, tPos):
-    if (hPos[0] == tPos[0] and hPos[1] == tPos[1]): # if on same position
-        return tPos # do not move tail
-    elif (math.sqrt((hPos[0]-tPos[0])**2 + (hPos[1]-tPos[1])**2) < 2): # if they are next to or diagonal
+    if (distance.chebyshev(hPos, tPos) < 2): # if they are same, next to or diagonal
         return tPos # do not move tail
     else:
         # if on same column
