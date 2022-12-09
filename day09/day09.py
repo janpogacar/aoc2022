@@ -28,6 +28,19 @@ def moveTail(hPos, tPos):
             elif (hPos[0] < tPos[0]) and (hPos[1] > tPos[1]):
                return [tPos[0]-1, tPos[1]+1]
 
+def tailPhysics(tails):
+    # Puzzle 1 solution
+    global tailPositions
+    # Puzzle 2 solution
+    global endTailPositions
+    for i in range(1, len(tails)):
+        tails[i] = moveTail(tails[i-1], tails[i])
+    if tails[1] not in tailPositions:
+        tailPositions.append(tails[1])
+    if tails[-1] not in endTailPositions:
+        endTailPositions.append(tails[-1])
+    return
+
 # opening the file in read mode
 myFile = open("input_09_1.txt", "r")
 #myFile = open("demoinput9.txt", "r")
@@ -52,43 +65,22 @@ for x in rsDataList:
     if x[0] == 'R':
         for i in range(int(x[1])):
             tails[0][0] += 1
-            for i in range(1, len(tails)):
-                tails[i] = moveTail(tails[i-1], tails[i])
-            # log last tail position
-            if tails[1] not in tailPositions:
-                tailPositions.append(tails[1])
-            if tails[-1] not in endTailPositions:
-                endTailPositions.append(tails[-1])
+            tailPhysics(tails)
     # Left
     elif x[0] == 'L':
         for i in range(int(x[1])):
             tails[0][0] -= 1
-            for i in range(1, len(tails)):
-                tails[i] = moveTail(tails[i-1], tails[i])
-            if tails[1] not in tailPositions:
-                tailPositions.append(tails[1])
-            if tails[-1] not in endTailPositions:
-                endTailPositions.append(tails[-1])
+            tailPhysics(tails)
     # Up
     elif x[0] == 'U':
         for i in range(int(x[1])):
             tails[0][1] += 1
-            for i in range(1, len(tails)):
-                tails[i] = moveTail(tails[i-1], tails[i])
-            if tails[1] not in tailPositions:
-                tailPositions.append(tails[1])
-            if tails[-1] not in endTailPositions:
-                endTailPositions.append(tails[-1])
+            tailPhysics(tails)
     # Down
     elif x[0] == 'D':
         for i in range(int(x[1])):
             tails[0][1] -= 1
-            for i in range(1, len(tails)):
-                tails[i] = moveTail(tails[i-1], tails[i])
-            if tails[1] not in tailPositions:
-                tailPositions.append(tails[1])
-            if tails[-1] not in endTailPositions:
-                endTailPositions.append(tails[-1])
+            tailPhysics(tails)
 
 print(f"Puzzle 1 solution: {len(tailPositions)}")
 print(f"Puzzle 2 solution: {len(endTailPositions)}")
