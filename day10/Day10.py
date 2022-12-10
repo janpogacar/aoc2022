@@ -8,7 +8,7 @@ def logResult(xReg, rValues, pc):
         rList.append(xReg)
     # Check if part 2 solution
     if pc % 40 in [xReg-1, xReg, xReg+1]:
-        crt[pc] = "#"
+        crt[pc] = "█"
     return
 
 # opening the file in read mode
@@ -32,7 +32,7 @@ rValues = [20, 60, 100, 140, 180, 220]
 crt = []
 # Fill CRT with emtpy dots
 for i in range(6*40):
-    crt.append('.')
+    crt.append('░')
 
 for i, x in enumerate(rsDataList):
     # No operation
