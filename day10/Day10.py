@@ -32,7 +32,7 @@ rValues = [20, 60, 100, 140, 180, 220]
 crt = []
 # Fill CRT with emtpy dots
 for i in range(6*40):
-    crt.append('░')
+    crt.append(' ')
 
 for i, x in enumerate(rsDataList):
     # No operation
