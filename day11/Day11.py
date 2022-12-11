@@ -13,6 +13,8 @@ class Monkey:
 
 # opening the file in read mode
 import math
+import copy
+
 myFile = open("input_11_1.txt", "r")
 #myFile = open("demoinput11.txt", "r")
 # reading the file
@@ -36,32 +38,42 @@ for i in range(1, len(rsDataList), 7):
     monkeys.append(Monkey(index, stItems, operand, operation, testN, trueM, falseM))   
     index += 1
 
+monkeys2 = copy.deepcopy(monkeys)
 part1ic = []
 for x in monkeys:
     part1ic.append(0)
 
-# for i in range(20):
-#     for j,x in enumerate(monkeys):
-#         # create copy of item
-#         icopy = x.items.copy()
-#         for k, item in enumerate(icopy):
-#             monkeys[j].items.remove(item)
-#             if x.operand == "old":
-#                 item = item*item
-#             elif x.operation == "*":
-#                 item = item*int(x.operand)
-#             else:
-#                 item = item+int(x.operand)
-#             item = math.floor(item/3)
-#             if item % x.testN == 0:
-#                 monkeys[x.trueM].items.append(item)
-#             else:
-#                 monkeys[x.falseM].items.append(item)
-#             monkeys[j].inspectCount += 1
-#             part1ic[j] += 1
-pDividers = [2, 3, 5, 7, 11, 13, 17, 19]
+for i in range(20):
+    for j,x in enumerate(monkeys):
+        # create copy of item
+        icopy = x.items.copy()
+        for k, item in enumerate(icopy):
+            monkeys[j].items.remove(item)
+            if x.operand == "old":
+                item = item*item
+            elif x.operation == "*":
+                item = item*int(x.operand)
+            else:
+                item = item+int(x.operand)
+            item = math.floor(item/3)
+            if item % x.testN == 0:
+                monkeys[x.trueM].items.append(item)
+            else:
+                monkeys[x.falseM].items.append(item)
+            monkeys[j].inspectCount += 1
+            part1ic[j] += 1
 
-for i, x in enumerate(monkeys):
+part1ic.sort()
+print(f"Part 1 solution: {part1ic[-1]*part1ic[-2]}") 
+
+for i, x in enumerate(part1ic):
+    part1ic[i] = 0
+
+pDividers = []
+for x in monkeys2:
+    pDividers.append(x.testN)
+
+for i, x in enumerate(monkeys2):
     for y in x.items:
         tmpList = []
         for z in pDividers:
@@ -69,9 +81,7 @@ for i, x in enumerate(monkeys):
         monkeys[i].moduli.append(tmpList)
 
 
-
 for i in range(10000):
-    print(i)
     for j,x in enumerate(monkeys):
         # create copy of item
         icopy = x.moduli.copy()
@@ -86,7 +96,6 @@ for i in range(10000):
             else:
                 for n,d in enumerate(item):
                     item[n] = item[n]+int(x.operand)
-            #item = math.floor(item/3)
             # divider cleanup
             icp = item.copy()
             for a, b in enumerate(icp):
@@ -100,11 +109,4 @@ for i in range(10000):
             part1ic[j] += 1
 
 part1ic.sort()
-print(f"Part 1 solution: {part1ic[-1]*part1ic[-2]}")        
-
-
-
-
-
-
-print("end")
+print(f"Part 2 solution: {part1ic[-1]*part1ic[-2]}")        
