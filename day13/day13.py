@@ -53,8 +53,7 @@ rsDataList = rsData.split("\n")
 packets = []
 for x in rsDataList:
     if x != "":
-        # Since input lines are pythonic lists anyway, we can just exec them
-        #exec(f"packets.append({x})")
+        # Since input lines are pythonic lists anyway, we can just eval them
         packets.append(eval(x))
 
 r0 = 0
