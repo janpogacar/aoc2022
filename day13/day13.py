@@ -1,22 +1,28 @@
-import numpy as np
+import functools
 
+# taken from: https://www.geeksforgeeks.org/python-program-to-swap-two-elements-in-a-list/
 def swapPositions(list, pos1, pos2):
 
     list[pos1], list[pos2] = list[pos2], list[pos1]
     return list
 
+# compare two pairs
 def comparePairs(p1, p2):
+    # If both inputs are integers
     if type(p1) is int and type(p2) is int:
         if p1 == p2:
+            # None return means sort on
             return None
         else:
             return p1 < p2
     elif type(p1) is list and type(p2) is list:
         for i, x in enumerate(p1):
+            # if p2 is exhausted
             if i > len(p2) - 1:
                 return False
             else:
                 cp = comparePairs(p1[i], p2[i])
+                # if true or false, return value
                 if cp is not None:
                     return cp
         # if p1 is exhausted
@@ -41,22 +47,27 @@ rsDataList = rsData.split("\n")
 packets = []
 for x in rsDataList:
     if x != "":
+        # Since input lines are pythonic lists anyway, we can just exec them
         exec(f"packets.append({x})")
+
 r0 = 0
 pc = 1
+# Loop over pais
 for i in range(0, len(packets)-1, 2):
     match = comparePairs(packets[i], packets[i+1])
+    # If return of comparePairs is none, it needs to be treated as true
     if match is not False:
         r0 += pc
     pc += 1
 
 print(f"Puzzle 1 result: {r0}")
 
+# Append the two values for part 2
 packets.append([[2]])
 packets.append([[6]])
 
 # Implement a bubble sort
-gSort = False
+gSort = False   # This becomes true when whole list is sorted
 while (gSort is False):
     gSort = True
     for i in range(0, len(packets)-1, 1):
@@ -66,4 +77,3 @@ while (gSort is False):
             gSort = False
 
 print(f"Puzzle 2 solution: {(packets.index([[2]])+1)*(packets.index([[6]])+1)}")
-print("end")
