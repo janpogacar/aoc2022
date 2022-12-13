@@ -37,6 +37,12 @@ def comparePairs(p1, p2):
         else:
             return comparePairs(p1, [p2])
 
+def wrapPairOutput(p1, p2):
+    if comparePairs(p1, p2) is False:
+        return 1
+    else:
+        return -1
+
 myFile = open("input_13_1.txt", "r")
 #myFile = open("demoinput13.txt", "r")
 # reading the file
@@ -66,14 +72,6 @@ print(f"Puzzle 1 result: {r0}")
 packets.append([[2]])
 packets.append([[6]])
 
-# Implement a bubble sort
-gSort = False   # This becomes true when whole list is sorted
-while (gSort is False):
-    gSort = True
-    for i in range(0, len(packets)-1, 1):
-        sorted = comparePairs(packets[i], packets[i+1])
-        if sorted is False:
-            packets = swapPositions(packets, i, i+1)
-            gSort = False
+sortedPackets = sorted(packets, key=functools.cmp_to_key(wrapPairOutput))
 
-print(f"Puzzle 2 solution: {(packets.index([[2]])+1)*(packets.index([[6]])+1)}")
+print(f"Puzzle 2 solution: {(sortedPackets.index([[2]])+1)*(sortedPackets.index([[6]])+1)}")
