@@ -1,5 +1,10 @@
 import numpy as np
 
+def swapPositions(list, pos1, pos2):
+
+    list[pos1], list[pos2] = list[pos2], list[pos1]
+    return list
+
 def comparePairs(p1, p2):
     if type(p1) is int and type(p2) is int:
         if p1 == p2:
@@ -47,4 +52,18 @@ for i in range(0, len(packets)-1, 2):
 
 print(f"Puzzle 1 result: {r0}")
 
+packets.append([[2]])
+packets.append([[6]])
+
+# Implement a bubble sort
+gSort = False
+while (gSort is False):
+    gSort = True
+    for i in range(0, len(packets)-1, 1):
+        sorted = comparePairs(packets[i], packets[i+1])
+        if sorted is False:
+            packets = swapPositions(packets, i, i+1)
+            gSort = False
+
+print(f"Puzzle 2 solution: {(packets.index([[2]])+1)*(packets.index([[6]])+1)}")
 print("end")
