@@ -1,6 +1,10 @@
 from scipy.spatial import distance
-myFile = open("input_15_1.txt", "r")
-#myFile = open("demoinput15.txt", "r")
+#myFile = open("input_15_1.txt", "r")
+#maxXY = 4000000
+#yline = 2000000
+myFile = open("demoinput15.txt", "r")
+maxXY = 20
+yline = 10
 # reading the file
 rsData = myFile.read()
 # split file at new lines
@@ -29,29 +33,16 @@ for i, sensor in enumerate(sensors):
     mds.append(distance.cityblock(sensor, beacons[i]))
     edgeSets.append(set())
 
-# for i, sensor in enumerate(sensors):
-#     md = distance.cityblock(sensor, beacons[i])
-#     for x in range(sensor[0]-md, sensor[0]+md+1):
-#         y = 2000000
-#         if (complex(x,y) not in points) and ([x,y] not in beacons) and (distance.cityblock(sensor, [x,y]) <= md):
-#             points.add(complex(x,y))
-#             result += 1
+for i, sensor in enumerate(sensors):
+    md = distance.cityblock(sensor, beacons[i])
+    for x in range(sensor[0]-md, sensor[0]+md+1):
+        if (complex(x,yline) not in points) and ([x,yline] not in beacons) and (distance.cityblock(sensor, [x,yline]) <= md):
+            points.add(complex(x,yline))
+            result += 1
 
-# for x in range(4000000+1):
-#     for y in range(4000000+1):
-#         # calculate manhatttan distance to sensor
-#         allCloser = True
-#         for n, sensor in enumerate(sensors):
-#             md = distance.cityblock([x,y], sensor)
-#             if md <= mds[n]:
-#                 allCloser = False
-#                 break
-#         if allCloser == True:
-#             print(4000000*x + y)
+print(f"Part 1 solution: {result}")
 
 endSet = set()
-
-maxXY = 4000000
 
 for i, sensor in enumerate(sensors):
     dx = 0
